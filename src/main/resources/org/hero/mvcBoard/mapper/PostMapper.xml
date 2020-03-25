@@ -10,23 +10,93 @@
     </insert>
 
     <select id="read" resultType="org.hero.mvcBoard.domain.PostVO">
-        select * from table_post where post_no = #{postNo}
+        select * from table_post where postNo = #{postNo}
     </select>
 
     <update id="update">
         update table_post set title = #{title},content = #{content},writer = #{writer}
-        where post_no = #{postNo}
+        where postNo = #{postNo}
     </update>
 
     <delete id="delete">
-        delete from table_post where post_no = #{postNo}
+        delete from table_post where postNo = #{postNo}
     </delete>
 
     <select id="listAll" resultType="org.hero.mvcBoard.domain.PostVO">
         <![CDATA[
-            select * from table_post
-            where post_no > 0
-            order by post_no desc,regdate desc
+            select postNo,title,content,writer,regdate,viewCnt from table_post
+            where postNo > 0
+            order by postNo desc,regdate desc
         ]]>
     </select>
+
+    <select id="getListWithPaging" resultType="org.hero.mvcBoard.domain.PostVO">
+        <![CDATA[
+            select postNo,title,content,writer,regdate,viewCnt from table_post
+            where postNo > 0
+            order by postNo desc,regdate desc
+            limit #{pageStart},#{pageAmount}
+        ]]>
+    </select>
+
+    <select id="countPost" resultType="int">
+        <![CDATA[
+            select count(*) from table_post
+            where postNo>0
+        ]]>
+    </select>
+
+    <select id="countSearchedPost" resultType="int">
+        <![CDATA[
+            select count(postNo) from table_post
+            where postNo>0
+        ]]>
+        <include refid="search"/>
+    </select>
+
+    <select id="searchedList" resultType="org.hero.mvcBoard.domain.PostVO">
+        <![CDATA[
+            select postNo,title,content,writer,regdate,viewCnt from table_post
+            where postNo > 0
+        ]]>
+        <include refid="search"/>
+        <![CDATA[
+            order by postNo desc,regdate desc
+            limit #{pageStart},#{pageAmount}
+        ]]>
+    </select>
+
+    <sql id="search">
+        <if test="searchType != null">
+            <if test="searchType == 't'.toString()">
+                AND title LIKE CONCAT('%',#{keyword},'%')
+            </if>
+            <if test="searchType == 'c'.toString()">
+                AND content LIKE CONCAT('%',#{keyword},'%')
+            </if>
+            <if test="searchType == 'w'.toString()">
+                AND writer LIKE CONCAT('%',#{keyword},'%')
+            </if>
+            <if test="searchType == 'tc'.toString()">
+                AND(
+                title LIKE CONCAT('%',#{keyword},'%')
+                OR content LIKE CONCAT('%',#{keyword},'%')
+                )
+            </if>
+            <if test="searchType == 'cw'.toString()">
+                AND(
+                writer LIKE CONCAT('%',#{keyword},'%')
+                OR content LIKE CONCAT('%',#{keyword},'%')
+                )
+            </if>
+            <if test="searchType == 'tcw'.toString()">
+                AND(
+                title LIKE CONCAT('%',#{keyword},'%')
+                OR content LIKE CONCAT('%',#{keyword},'%')
+                OR writer LIKE CONCAT('%',#{keyword},'%')
+                )
+            </if>
+        </if>
+    </sql>
+
 </mapper>

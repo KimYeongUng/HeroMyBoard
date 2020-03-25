@@ -10,7 +10,7 @@
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="home.jsp" class="logo">
+    <a href="/" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>B</b>RD</span>
         <!-- logo for regular state and mobile devices -->
@@ -42,7 +42,7 @@
                                     <a href="#">
                                         <div class="pull-left">
                                             <!-- User Image -->
-                                            <img src="dist/img/me.jpeg" class="img-circle" alt="User Image">
+                                            <img src="${pageContext.request.contextPath}/resources/dist/img/me.jpeg" class="img-circle" alt="User Image">
                                         </div>
                                         <!-- Message title and timestamp -->
                                         <h4>
@@ -127,14 +127,14 @@
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
-                        <img src="dist/img/me.jpeg" class="user-image" alt="User Image">
+                        <img src="../../../resources/dist/img/me.jpeg" class="user-image" alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
                         <span class="hidden-xs">YeongUng Kim</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
                         <li class="user-header">
-                            <img src="dist/img/me.jpeg" class="img-circle" alt="User Image">
+                            <img src="../../../resources/dist/img/me.jpeg" class="img-circle" alt="User Image">
 
                             <p>
                                 YeongUng Kim - Developer

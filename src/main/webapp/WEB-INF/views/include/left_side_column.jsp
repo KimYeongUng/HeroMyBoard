@@ -14,7 +14,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="dist/img/me.jpeg" class="img-circle" alt="User Image">
+                <img src="${path}/resources/dist/img/me.jpeg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>YeongUng Kim</p>
@@ -37,21 +37,10 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">HEADER</li>
+            <li class="header">Menu</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-            <li class="treeview">
-                <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-                    <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="#">Link in level 2</a></li>
-                    <li><a href="#">Link in level 2</a></li>
-                </ul>
-            </li>
+            <li class="active"><a href="${path}/board/register"><i class="fa fa-link"></i> <span>Register Post</span></a></li>
+            <li><a href="${path}/board/list"><i class="fa fa-link"></i> <span>Board List</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

@@ -5,7 +5,7 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
-<%@include file="include/head.jsp"%>
+<%@include file="../include/head.jsp"%>
 <!--
 BODY TAG OPTIONS:
 =================
@@ -30,17 +30,17 @@ desired effect
 <div class="wrapper">
 
     <!-- Main Header -->
-    <%@include file="include/main_header.jsp"%>
+    <%@include file="../include/main_header.jsp"%>
     <!-- Left side column. contains the logo and sidebar -->
-    <%@include file="include/left_side_column.jsp"%>
+    <%@include file="../include/left_side_column.jsp"%>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                This is Welcome Page
-                <small>Welcome Page</small>
+                게시글 조회
+                <small>Read</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -50,18 +50,54 @@ desired effect
 
         <!-- Main content -->
         <section class="content container-fluid">
-
-            <!--------------------------
-              | Your Page Content Here |
-              -------------------------->
-
+            <div class="col-lg-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">글 제목: ${post.title}</h3>
+                    </div>
+                    <div class="box-body" style="width: 700px">
+                        ${post.content}
+                    </div>
+                    <div class="box-footer">
+                        <div class="user-block">
+                            <img class="img-circle img-bordered-sm" src="${pageContext.request.contextPath}/resources/dist/img/me.jpeg" alt = "user image">
+                            <span class="username">
+                                <a href="#">${post.writer}</a>
+                            </span>
+                            <span class="description">
+                                <fmt:formatDate pattern="yyy-MM-dd a HH:mm" value="${post.regdate}"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <form role="form" method="post">
+                            <input type="hidden" name="postNo" value="${post.postNo}">
+                            <input type="hidden" name="page" value="${cri.page}">
+                            <input type="hidden" name="pageAmount" value="${cri.pageAmount}">
+                            <input type="hidden" name="searchType" value="${cri.searchType}">
+                            <input type="hidden" name="keyword" value="${cri.keyword}">
+                        </form>
+                        <button type="submit" class="btn btn-primary listBtn"><i class="fa fa-list"></i>
+                             목록
+                        </button>
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-warning modBtn"><i class="fa fa-edit"></i>
+                                 수정
+                            </button>
+                            <button type="submit" class="btn btn-danger delBtn"><i class="fa fa-trash"></i>
+                                 삭제
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
     <!-- Main Footer -->
-    <%@include file="include/main_footer.jsp"%>
+    <%@include file="../include/main_footer.jsp"%>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -142,10 +178,35 @@ desired effect
 </div>
 <!-- ./wrapper -->
 
-<%@include file="include/plugin_js.jsp"%>
+<%@include file="../include/plugin_js.jsp"%>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+<script>
+    $(document).ready(function () {
+        var formObj = $("form[role='form']");
+        console.log(formObj);
+
+        $(".modBtn").on("click",function () {
+            formObj.attr("action","/board/modify");
+            formObj.attr("method","get");
+            formObj.submit();
+        });
+
+        $(".delBtn").on("click",function () {
+            formObj.attr("action","/board/remove");
+            formObj.submit();
+        });
+
+        $(".listBtn").on("click",function () {
+
+            formObj.attr("action","/board/list");
+            formObj.attr("method","get");
+            formObj.attr("action","/board/list");
+            formObj.submit();
+        });
+    });
+</script>
 </body>
 </html>

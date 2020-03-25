@@ -6,13 +6,18 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context-4.3.xsd
-       http://mybatis.org/schema/mybatis-spring
+       http://www.springframework.org/schema/context/spring-context-4.3.xsd http://mybatis.org/schema/mybatis-spring
        http://mybatis.org/schema/mybatis-spring.xsd">
 
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <!--
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mysql://localhost/HeroMVC?useSSL=false&amp;serverTimezone=Asia/Seoul"/>
+        <property name="username" value="root"/>
+        <property name="password" value="920124"/>
+        -->
+        <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+        <property name="jdbcUrl" value="jdbc:log4jdbc:mysql://localhost/HeroMVC?useSSL=false&amp;serverTimezone=Asia/Seoul"/>
         <property name="username" value="root"/>
         <property name="password" value="920124"/>
     </bean>

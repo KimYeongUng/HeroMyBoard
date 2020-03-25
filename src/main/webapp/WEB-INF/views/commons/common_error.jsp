@@ -5,7 +5,7 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
-<%@include file="include/head.jsp"%>
+<%@include file="../include/head.jsp"%>
 <!--
 BODY TAG OPTIONS:
 =================
@@ -30,9 +30,9 @@ desired effect
 <div class="wrapper">
 
     <!-- Main Header -->
-    <%@include file="include/main_header.jsp"%>
+    <%@include file="../include/main_header.jsp"%>
     <!-- Left side column. contains the logo and sidebar -->
-    <%@include file="include/left_side_column.jsp"%>
+    <%@include file="../include/left_side_column.jsp"%>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -50,18 +50,19 @@ desired effect
 
         <!-- Main content -->
         <section class="content container-fluid">
-
-            <!--------------------------
-              | Your Page Content Here |
-              -------------------------->
-
+            <h3><i class="fa fa-warning text-red"></i>${exception.getMessage()} </h3>
+            <ul>
+                <c:forEach items="${exception.getStackTrace()}" var="stack">
+                    <li>${stack.toString()}</li>
+                </c:forEach>
+            </ul>
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
     <!-- Main Footer -->
-    <%@include file="include/main_footer.jsp"%>
+    <%@include file="../include/main_footer.jsp"%>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -142,7 +143,7 @@ desired effect
 </div>
 <!-- ./wrapper -->
 
-<%@include file="include/plugin_js.jsp"%>
+<%@include file="../include/plugin_js.jsp"%>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

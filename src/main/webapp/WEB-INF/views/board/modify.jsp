@@ -5,7 +5,7 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
-<%@include file="include/head.jsp"%>
+<%@include file="../include/head.jsp"%>
 <!--
 BODY TAG OPTIONS:
 =================
@@ -30,17 +30,17 @@ desired effect
 <div class="wrapper">
 
     <!-- Main Header -->
-    <%@include file="include/main_header.jsp"%>
+    <%@include file="../include/main_header.jsp"%>
     <!-- Left side column. contains the logo and sidebar -->
-    <%@include file="include/left_side_column.jsp"%>
+    <%@include file="../include/left_side_column.jsp"%>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                This is Welcome Page
-                <small>Welcome Page</small>
+                Page Header
+                <small>Optional description</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -50,18 +50,50 @@ desired effect
 
         <!-- Main content -->
         <section class="content container-fluid">
-
-            <!--------------------------
-              | Your Page Content Here |
-              -------------------------->
-
+            <div class="col-lg-12">
+                <form role="form" id="writeForm" method="post" action="${path}/board/modify">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">게시글 수정</h3>
+                        </div>
+                        <div class="box-body">
+                            <input type="hidden" name="postNo" value="${post.postNo}">
+                            <input type="hidden" name="page" value="${cri.page}">
+                            <input type="hidden" name="pageAmount" value="${cri.pageAmount}">
+                            <input type="hidden" name="searchType" value="${cri.searchType}">
+                            <input type="hidden" name="keyword" value="${cri.keyword}">
+                            <div class="form-group">
+                                <label for="title">제목</label>
+                                <input class="form-control" id="title" name="title" placeholder="제목 입력하세요"
+                                       value="${post.title}">
+                            </div>
+                            <div class="form-group">
+                                <label for="content">내용</label>
+                                <textarea class="form-control" id="content" name="content" rows="30" placeholder="내용 입력"
+                                          style="resize: none;">${post.content}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="writer">작성자</label>
+                                <input class="form-control" id="writer" name="writer" value="${post.writer}" readonly>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="button" class="btn btn-primary"><i class="fa fa-list"></i>목록</button>
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-warning cancelBtn"><i class="fa fa-trash"></i>취소</button>
+                                <button type="submit" class="btn btn-success modBtn"><i class="fa fa-save"></i>수정</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
     <!-- Main Footer -->
-    <%@include file="include/main_footer.jsp"%>
+    <%@include file="../include/main_footer.jsp"%>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -142,10 +174,28 @@ desired effect
 </div>
 <!-- ./wrapper -->
 
-<%@include file="include/plugin_js.jsp"%>
+<%@include file="../include/plugin_js.jsp"%>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+<script>
+    $(document).ready(function () {
+        var formObj = $("form[role='form']");
+        console.log(formObj);
+
+        $(".modBtn").on("click",function () {
+            formObj.submit();
+        });
+
+        $(".cancelBtn").on("click",function () {
+            history.go(-1);
+        });
+
+        $(".listBtn").on("click",function () {
+            self.location="/board/list?page=${cri.page}&pageAmount=${cri.pageAmount}&searchType=${cri.searchType}$keyword=${cri.keyword}";
+        });
+    });
+</script>
 </body>
 </html>

@@ -2,6 +2,8 @@ package org.hero.mvcBoard.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import org.hero.mvcBoard.commons.paging.Criteria;
+import org.hero.mvcBoard.commons.paging.SearchCriteria;
 import org.hero.mvcBoard.domain.PostVO;
 import org.hero.mvcBoard.mapper.PostMapper;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostVO read(Integer postNo) throws Exception {
+    public PostVO read(Long postNo) throws Exception {
         log.info("read: "+postNo);
         return mapper.read(postNo);
     }
@@ -33,7 +35,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public boolean delete(Integer postNo) throws Exception {
+    public boolean delete(Long postNo) throws Exception {
         log.info("delete: "+postNo);
         return mapper.delete(postNo) == 1;
     }
@@ -42,5 +44,29 @@ public class PostServiceImpl implements PostService {
     public List<PostVO> listAll() throws Exception {
         log.info("return list of Posts...");
         return mapper.listAll();
+    }
+
+    @Override
+    public List<PostVO> listPaging(Criteria cri) throws Exception {
+
+        return mapper.getListWithPaging(cri);
+    }
+
+    @Override
+    public int countPost(Criteria cri) throws Exception {
+        log.info("Count Post");
+        return mapper.countPost(cri);
+    }
+
+    @Override
+    public List<PostVO> searchedList(SearchCriteria cri) throws Exception {
+        log.info("======== Searched List ========");
+        return mapper.searchedList(cri);
+    }
+
+    @Override
+    public int countSearchedList(SearchCriteria cri) throws Exception {
+        log.info("======= Count Searched Posts =======");
+        return mapper.countSearchedPost(cri);
     }
 }

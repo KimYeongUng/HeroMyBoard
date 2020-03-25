@@ -9,7 +9,6 @@
 <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-        Anything you want
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2020 <a href="https://github.com/KimYeongUng"> KimYeongUng </a> All rights reserved. </strong>
